@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Análisis SEO — Trawick International</title>
+<style>
+  :root{
+    --navy:#0B2A4A; --navy2:#123a63; --steel:#2f5d8a;
+    --teal:#0EA5A4; --teal-d:#0b8483; --gold:#E9A23B;
+    --ink:#16232f; --muted:#5b6b7a; --line:#e4eaf1;
+    --bg:#f5f8fc; --card:#ffffff; --soft:#eef4fb;
+    --good:#1f9d6b; --warn:#d98324; --hot:#d94f4f;
+    --en:#295a91; --es:#0b8483; --pt:#1f8a4c;
+    --shadow:0 1px 2px rgba(16,40,64,.06),0 6px 24px rgba(16,40,64,.07);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+  a{color:var(--teal-d);text-decoration:none} a:hover{text-decoration:underline}
+
+  header.hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 55%,var(--steel) 130%);color:#fff;padding:44px 0 38px}
+  .kicker{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#a9c7e6;font-weight:700}
+  .kicker::before{content:"";width:26px;height:2px;background:var(--teal);display:inline-block}
+  header.hero h1{font-size:33px;line-height:1.15;margin:14px 0 8px;font-weight:800;letter-spacing:-.5px}
+  header.hero .sub{color:#cfe0f1;font-size:16px;max-width:820px}
+  .meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+  .chip{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);color:#eaf2fb;padding:6px 12px;border-radius:999px;font-size:12.5px;font-weight:600}
+  .chip b{color:#fff}
+  .scope{margin-top:16px;font-size:13px;color:#bcd2e8;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:10px 14px;max-width:820px}
+  .scope b{color:#fff}
+
+  section{padding:34px 0}
+  section + section{border-top:1px solid var(--line)}
+  h2{font-size:22px;font-weight:800;letter-spacing:-.3px;margin:0 0 4px;color:var(--navy)}
+  h2 .n{display:inline-flex;justify-content:center;align-items:center;width:28px;height:28px;border-radius:8px;background:var(--teal);color:#fff;font-size:14px;margin-right:10px;vertical-align:2px}
+  .lead{color:var(--muted);margin:2px 0 20px;font-size:15px;max-width:880px}
+  h3{font-size:15px;font-weight:800;color:var(--navy2);margin:26px 0 10px;text-transform:uppercase;letter-spacing:.04em}
+
+  /* language ribbon */
+  .ref{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;padding:5px 12px;border-radius:8px;margin:22px 0 10px}
+  .ref .fl{font-size:15px}
+  .ref-en{background:#e7f0fb;color:var(--en)}
+  .ref-es{background:#e6f7f4;color:var(--es)}
+  .ref-pt{background:#e9f7ec;color:var(--pt)}
+
+  .grid{display:grid;gap:16px}
+  .g4{grid-template-columns:repeat(4,1fr)} .g3{grid-template-columns:repeat(3,1fr)} .g2{grid-template-columns:repeat(2,1fr)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--shadow)}
+  .stat .v{font-size:25px;font-weight:800;color:var(--navy);letter-spacing:-.5px}
+  .stat .l{font-size:12.5px;color:var(--muted);margin-top:2px;font-weight:600}
+  .stat .h{font-size:11.5px;color:var(--teal-d);margin-top:8px;font-weight:700}
+
+  .thesis{background:linear-gradient(180deg,#fff,#f7fbff);border:1px solid #d6e6f4;border-left:5px solid var(--teal);border-radius:12px;padding:18px 20px;margin:6px 0 4px}
+  .thesis b{color:var(--navy)}
+  .note{background:#fff8ed;border:1px solid #f2dcae;border-left:5px solid var(--gold);border-radius:12px;padding:14px 18px;font-size:14px;color:#6b5427}
+  .read{background:#f4f9ff;border:1px solid #d9e7f5;border-left:5px solid var(--steel);border-radius:12px;padding:14px 18px;font-size:13.5px;color:#2a4763;margin-top:14px}
+  .read b{color:var(--navy)}
+  .read ul{margin:6px 0 0;padding-left:18px} .read li{margin:5px 0}
+
+  .tbl{width:100%;border-collapse:collapse;font-size:13px;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .tbl th{background:var(--soft);color:var(--navy2);text-align:left;font-weight:700;padding:9px 11px;font-size:11.5px;text-transform:uppercase;letter-spacing:.02em;border-bottom:1px solid var(--line)}
+  .tbl td{padding:8px 11px;border-bottom:1px solid #eef2f7;vertical-align:middle}
+  .tbl tr:last-child td{border-bottom:none}
+  .tbl tr:hover td{background:#f9fcff}
+  .tbl td.num,.tbl th.num{text-align:right;font-variant-numeric:tabular-nums}
+  .scroll{overflow-x:auto;border-radius:12px}
+  .kw{font-weight:600;color:var(--ink)} .dom{font-weight:700;color:var(--navy2)}
+  .hi{background:#e9f8f2 !important}
+
+  .vc{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
+  .b0{color:#c2ccd6;font-weight:500} .b1{color:#6a7c8b} .b2{color:#2f5d8a} .b3{color:#0b8483} .b4{color:#0a6f4a} .b5{color:#0a6f4a;background:#e9f8f2}
+
+  .badge{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:6px;line-height:1.5}
+  .b-dir{background:#fde7e7;color:#b23b3b} .b-esp{background:#fdf0e2;color:#b5751d} .b-ind{background:#eef1f6;color:#516074} .b-comp{background:#e7f0fb;color:#295a91} .b-cont{background:#efe9fb;color:#6a4bb0}
+  .th{font-weight:700} .th-a{color:var(--hot)} .th-m{color:var(--warn)} .th-b{color:var(--good)} .th-r{color:var(--steel)}
+  .tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--soft);color:var(--navy2);margin:2px 4px 2px 0}
+  .pill-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+  .seg{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--teal-d)}
+  .country{font-weight:800;color:var(--navy)} .flag{font-size:15px;margin-right:4px}
+  ul.clean{margin:6px 0 0;padding-left:18px} ul.clean li{margin:6px 0}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+  footer{background:var(--navy);color:#c7d7e8;padding:26px 0;margin-top:10px;font-size:13px}
+  footer b{color:#fff} .src{font-size:12px;color:#8aa0b5}
+
+  /* competitive tiers */
+  .tier td{background:var(--navy);color:#fff;font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:.05em;padding:6px 11px}
+  .tier-ref td{background:#e7ecf2;color:#4a5c6e}
+  tr.refrow td{background:#f7f9fc;color:#5b6b7a} tr.refrow:hover td{background:#f1f5fa} tr.refrow .dom{color:#6a7c8b}
+  .b-prem{background:#e9f8f2;color:#0a7a52} .b-ref{background:#eef1f6;color:#6a7c8b}
+  .tierlbl{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;padding:5px 11px;border-radius:7px;margin:0 0 8px}
+  .tl-prem{background:#e9f8f2;color:#0a7a52} .tl-ref{background:#eef1f6;color:#516074}
+  .posnote{background:#fff8ed;border:1px solid #f2dcae;border-left:5px solid var(--gold);border-radius:12px;padding:12px 16px;font-size:13px;color:#6b5427;margin:2px 0 18px}
+
+  /* stacked bar chart */
+  .chartbox{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 18px 18px;box-shadow:var(--shadow)}
+  .cols{display:flex;align-items:flex-end;justify-content:center;gap:46px;height:300px;padding-top:6px;border-bottom:2px solid var(--line)}
+  .col{width:104px;display:flex;flex-direction:column-reverse;position:relative}
+  .seg{width:100%;color:#fff;font-size:10.5px;font-weight:800;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;line-height:1.15;overflow:hidden}
+  .seg small{font-weight:600;opacity:.9;font-size:10px}
+  .col .cap{position:absolute;top:100%;left:50%;transform:translateX(-50%);margin-top:9px;text-align:center;white-space:nowrap;font-size:12.5px;font-weight:800;color:var(--navy)}
+  .col .cap small{display:block;font-weight:700;color:var(--muted);font-size:11px}
+  .leg{display:flex;flex-wrap:wrap;gap:16px;margin-top:54px;justify-content:center}
+  .leg span{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;color:var(--navy2)}
+  .leg i{width:13px;height:13px;border-radius:3px;display:inline-block}
+
+  @media(max-width:860px){ .g4{grid-template-columns:repeat(2,1fr)} .g3,.g2,.two{grid-template-columns:1fr} header.hero h1{font-size:26px} }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="kicker">Análisis Competitivo SEO &amp; Semántico · Proyecto Seguro Salud</span>
+    <h1>Trawick International y su competencia en EE.&nbsp;UU.:<br>conceptos, semántica y búsquedas — con referencia ES y PT</h1>
+    <p class="sub">Radiografía de <b>trawickinternational.com</b> y sus competidores en EE.&nbsp;UU. (orgánico y pago), más el research de keywords en <b>inglés (EE.UU.)</b>, <b>español (LatAm + España)</b> y <b>portugués (Brasil + Portugal)</b> para identificar qué conceptos y términos importan al llevar la categoría al mercado de habla hispana.</p>
+    <div class="meta">
+      <span class="chip">Base: <b>Trawick + competencia EE.UU.</b></span>
+      <span class="chip">Fuente: <b>Semrush (datos en vivo)</b></span>
+      <span class="chip">Consultado: <b>14-sep-2026</b></span>
+      <span class="chip">Bases: <b>US · CL·MX·ES·CO·AR · BR·PT</b></span>
+    </div>
+    <div class="scope"><b>Alcance de esta entrega:</b> solo <b>análisis</b> (Competencia orgánica · Competencia Paid · Keyword Research). No incluye propuesta ni plan de campaña — eso queda para una etapa posterior, cuando validemos estos hallazgos.</div>
+  </div>
+</header>
+
+<!-- 01 HALLAZGOS -->
+<section>
+  <div class="wrap">
+    <h2><span class="n">01</span>Hallazgos clave</h2>
+    <p class="lead">Lo esencial que arroja la data, antes del detalle por solapa.</p>
+
+    <div class="grid g4">
+      <div class="card stat"><div class="v">3.471</div><div class="l">Keywords orgánicas de Trawick (US)</div><div class="h">≈16.6K visitas/mes · valor ≈US$84K</div></div>
+      <div class="card stat"><div class="v">2 pilares</div><div class="l">Médico de viaje (outbound) + Visitantes a EE.UU. (inbound)</div><div class="h">+ cancelación (CFAR), anual y destino</div></div>
+      <div class="card stat"><div class="v">40.500</div><div class="l">"seguro viagem" / mes en Brasil</div><div class="h">el mayor mercado único de la región</div></div>
+      <div class="card stat"><div class="v">≈0</div><div class="l">Presencia orgánica de Trawick en ES/PT</div><div class="h">CL 3 kw · MX 33 kw · terreno virgen</div></div>
+    </div>
+
+    <div class="scroll" style="margin-top:16px">
+    <table class="tbl">
+      <thead><tr><th style="width:34px">#</th><th>Hallazgo</th><th>Detalle (dato real · Semrush)</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td class="th">Trawick es mediano y muy anglosajón</td><td>Semrush Rank US 116.328; fuerte en su marca y en la categoría, pero casi nulo en español/portugués. El mercado hispano-luso es incremental desde cero.</td></tr>
+        <tr><td>2</td><td class="th">Dos pilares de categoría</td><td><b>Médico de viaje</b> ("travel medical insurance international" 2.900) y <b>Visitantes a EE.UU.</b> ("medical insurance for visitors to usa" 1.600). Su producto <i>Safe Travels USA</i> es el gancho inbound.</td></tr>
+        <tr><td>3</td><td class="th">Su tráfico convierte poco por orgánico comercial</td><td>El intent orgánico es sobre todo de marca (~8.760) e informacional (~6.680); lo transaccional es casi nulo (~40). La búsqueda comercial de categoría está mayormente sin capturar.</td></tr>
+        <tr><td>4</td><td class="th">Trawick apenas invierte en Paid</td><td>Solo 12 keywords pagadas. En cambio, rivales de nicho (imglobal 1.182 kw Ads, sevencorners 967, worldtrips 592) empujan fuerte el canal pagado.</td></tr>
+        <tr><td>5</td><td class="th">Brasil es el mercado más grande de la región</td><td>"seguro viagem" 40.500/mes (vs. 14.800 en CL/ES). Portugués usa "seguro viagem" (sin "de") y term. propia: "cotação", "assistência de viagem".</td></tr>
+        <tr><td>6</td><td class="th">En LatAm se busca "asistencia", no solo "seguro"</td><td>Argentina: "asistencia al viajero" 22.200/mes. Herencia de marcas de asistencia (Assist Card, Universal Assistance).</td></tr>
+        <tr><td>7</td><td class="th">El motor long-tail es el destino</td><td>"seguro para viajar a argentina" 1.900 (ES); "seguro viagem chile" 1.300 y "…para argentina" 1.300 (PT). Trawick ya usa esta táctica en inglés (Costa Rica, Israel).</td></tr>
+        <tr><td>8</td><td class="th">Cada mercado tiene un "segundo idioma"</td><td>Médico → Colombia; asistencia → Argentina; Schengen/anual/estudiantes → España; viaje a EE.UU. → México; volumen + cotação → Brasil.</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<!-- 02 PERFIL -->
+<section>
+  <div class="wrap">
+    <h2><span class="n">02</span>Perfil de Trawick International (base EE.&nbsp;UU.)</h2>
+    <p class="lead">La entidad de referencia. Cómo está construido su tráfico y qué conceptos lo sostienen (base <b>us</b> de Semrush).</p>
+    <div class="grid g4">
+      <div class="card stat"><div class="v">116.328</div><div class="l">Semrush Rank (US)</div></div>
+      <div class="card stat"><div class="v">3.471</div><div class="l">Keywords orgánicas</div><div class="h">246 en top 3 · 626 en 4–10</div></div>
+      <div class="card stat"><div class="v">16.587</div><div class="l">Tráfico orgánico/mes</div><div class="h">valor equiv. ≈US$84K</div></div>
+      <div class="card stat"><div class="v">12</div><div class="l">Keywords de pago (SEM)</div><div class="h">inversión paga marginal</div></div>
+    </div>
+    <div class="note" style="margin-top:16px"><b>Producto (verificado en su sitio).</b> Línea <b>Safe Travels</b>: <i>Safe Travels USA</i> (seguro médico para visitantes a EE.&nbsp;UU.), <i>USA Comprehensive</i>, <i>Elite</i>, <i>Voyager</i>, <i>International</i>; más planes de cancelación, anual y CFAR, y páginas por destino. Dos audiencias claras: <b>outbound</b> (estadounidense que viaja) e <b>inbound</b> (extranjero que visita EE.&nbsp;UU.) — este último, el más relevante para el viajero latino.</div>
+  </div>
+</section>
+
+<!-- 03 COMPETENCIA ORGANICA -->
+<section>
+  <div class="wrap">
+    <h2><span class="n">03</span>Competencia orgánica</h2>
+    <p class="lead">Marco de lectura: Trawick compite por <b>valor (alto precio + calidad/cobertura)</b>, no por precio. Por eso separamos dos niveles: la <b>competencia real</b> (marcas premium/calidad) y la <b>referencia / cruce</b> (comparadores, bundles de banca-retail y clúster "barato") — que no son competencia directa pero <b>saturan la SERP, generan ruido y bajan la oportunidad de presencia</b>.</p>
+    <div class="posnote" id="nota-pos"><b>* Nota de posicionamiento (importante).</b> <b>Hoy trawickinternational.com NO ejecuta acciones que lo posicionen en el segmento de precio alto: no comunica ni posiciona planes premium.</b> Su sitio, su SEO y su marca operan como una opción <b>accesible</b> (línea <i>Safe Travels</i>, con búsquedas asociadas price-sensitive). Por eso, ubicarlo en el nivel premium/calidad de este análisis es una <b>decisión estratégica a futuro</b> para el mercado hispano —no un reflejo de lo que la marca hace hoy—: exigiría construir la propuesta de valor (cobertura, respaldo, confianza) y la comunicación que actualmente no tiene. Todas las menciones a Trawick como "premium" en este documento llevan este <b>*</b> y deben leerse en ese sentido.</div>
+
+    <div class="ref ref-en"><span class="fl">🇺🇸</span>Referencia EE.UU. (inglés) — el entorno competitivo de Trawick</div>
+    <div class="scroll">
+    <table class="tbl">
+      <thead><tr><th>Dominio</th><th>Perfil</th><th>Relevancia</th><th class="num">KW comunes</th><th class="num">KW orgánicas</th><th class="num">Tráfico/mes</th></tr></thead>
+      <tbody>
+        <tr class="tier" style="background:#0EA5A4"><td colspan="6">◆ Base analizada — dónde se posiciona Trawick</td></tr>
+        <tr class="hi"><td class="dom">trawickinternational.com <span class="tag">TRAWICK</span></td><td><span class="badge b-prem">Aseguradora (Safe Travels)</span><a href="#nota-pos" style="color:#d98324;font-weight:800;text-decoration:none"><sup>*</sup></a></td><td class="th th-r">— · base</td><td class="num">—</td><td class="num">3.471</td><td class="num">16.587</td></tr>
+        <tr class="tier"><td colspan="6">● Competencia real — segmento premium / calidad (aseguradoras y underwriters de marca)</td></tr>
+        <tr><td class="dom">allianztravelinsurance.com</td><td><span class="badge b-prem">Aseguradora premium</span></td><td class="th th-a">0,13 · Alta</td><td class="num">1.077</td><td class="num">59.423</td><td class="num">502.434</td></tr>
+        <tr><td class="dom">travelguard.com <span class="tag">AIG</span></td><td><span class="badge b-prem">Aseguradora premium</span></td><td class="th th-m">0,15 · Media</td><td class="num">927</td><td class="num">27.261</td><td class="num">203.129</td></tr>
+        <tr><td class="dom">imglobal.com · worldtrips.com <span class="tag">IMG</span></td><td><span class="badge b-prem">Underwriter marca / expat</span></td><td class="th th-a">0,21 / 0,12</td><td class="num">933 / 737</td><td class="num">18.852 / 20.955</td><td class="num">127.783 / 41.277</td></tr>
+        <tr><td class="dom">sevencorners · travelex · generali travel</td><td><span class="badge b-prem">Aseguradora premium</span></td><td class="th th-m">0,07–0,21</td><td class="num">330–452</td><td class="num">6.307–19.512</td><td class="num">37.872–43.510</td></tr>
+        <tr class="tier tier-ref"><td colspan="6">○ Referencia / cruce — no-competencia (comparadores, marketplaces de precio y contenido) · genera ruido, baja presencia</td></tr>
+        <tr class="refrow"><td class="dom">insuremytrip.com</td><td><span class="badge b-ref">Comparador / agregador</span></td><td class="th th-r">0,18</td><td class="num">973</td><td class="num">26.520</td><td class="num">466.789</td></tr>
+        <tr class="refrow"><td class="dom">squaremouth.com</td><td><span class="badge b-ref">Comparador / agregador</span></td><td class="th th-r">0,12</td><td class="num">1.365</td><td class="num">43.516</td><td class="num">260.220</td></tr>
+        <tr class="refrow"><td class="dom">visitorscoverage · insubuy · americanvisitorinsurance</td><td><span class="badge b-ref">Marketplace visitantes (precio)</span></td><td class="th th-r">0,20–0,31</td><td class="num">715–786</td><td class="num">15.881–34.174</td><td class="num">14.600–27.418</td></tr>
+        <tr class="refrow"><td class="dom">nerdwallet · forbes · usnews</td><td><span class="badge b-ref">Contenido / reseñas</span></td><td class="th th-r">0,00</td><td class="num">649–944</td><td class="num">—</td><td class="num">muy alto</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="src" style="margin-top:6px"><b>Dónde queda Trawick:</b> con ≈16.587 visitas/mes es un <b>jugador pequeño</b> frente a los líderes premium (Allianz 502K, Travel Guard 203K, IMG 128K) e incluso por debajo de Seven Corners/Travelex/Generali (37–43K). Compite en el segmento de calidad, pero con mucha menos presencia orgánica — la brecha es la oportunidad. · Relevancia = índice de competencia orgánica de Semrush (0–1); los marketplaces de visitantes tienen "relevancia" alta con Trawick porque <b>revenden sus planes Safe Travels</b> y comparan por precio — por eso son referencia/cruce, no competencia de calidad.</p>
+
+    <div class="ref ref-es"><span class="fl">🌎</span>Referencia español (LatAm + España) — SERP de la categoría</div>
+    <div class="two">
+      <div class="card">
+        <span class="tierlbl tl-prem">● Competencia real (premium / calidad)</span>
+        <p style="font-size:12.5px;color:var(--muted);margin:0 0 6px">Marcas de asistencia y aseguradoras con cobertura y respaldo fuerte — el benchmark de valor.</p>
+        <div class="pill-row"><span class="tag">Assist Card</span><span class="tag">Universal Assistance</span><span class="tag">IATI</span><span class="tag">AXA</span><span class="tag">Allianz Assistance</span><span class="tag">Europ Assistance</span><span class="tag">Heymondo</span><span class="tag">Intermundial</span><span class="tag">Mapfre</span><span class="tag">ARAG</span><span class="tag">ERGO</span><span class="tag">SURA</span></div>
+      </div>
+      <div class="card" style="background:#f7f9fc">
+        <span class="tierlbl tl-ref">○ Referencia / cruce (no-competencia)</span>
+        <p style="font-size:12.5px;color:var(--muted);margin:0 0 6px">Saturan la SERP y capturan intención genérica/precio — a vigilar, no a imitar.</p>
+        <p style="font-size:11.5px;color:var(--muted);margin:0 0 3px;font-weight:700">Comparadores</p>
+        <div class="pill-row"><span class="tag">ComparaOnline</span><span class="tag">Rastreator</span></div>
+        <p style="font-size:11.5px;color:var(--muted);margin:8px 0 3px;font-weight:700">Banca / retail (bundle)</p>
+        <div class="pill-row"><span class="tag">Seguros Falabella</span><span class="tag">BCI</span><span class="tag">Banco de Chile</span><span class="tag">Scotiabank</span><span class="tag">Santander</span><span class="tag">Itaú</span><span class="tag">BancoEstado</span></div>
+        <p style="font-size:11.5px;color:var(--muted);margin:8px 0 3px;font-weight:700">Contenido / blogs · institucional</p>
+        <div class="pill-row"><span class="tag">Holafly</span><span class="tag">Viajeros Callejeros</span><span class="tag">Comiviajeros</span><span class="tag">Consulado (gob)</span></div>
+      </div>
+    </div>
+
+    <div class="ref ref-pt"><span class="fl">🇧🇷</span>Referencia portugués (Brasil) — SERP "seguro viagem"</div>
+    <div class="two">
+      <div class="card">
+        <span class="tierlbl tl-prem">● Competencia real (premium / calidad)</span>
+        <div class="pill-row"><span class="tag">SulAmérica</span><span class="tag">Assist Card</span><span class="tag">Allianz Travel</span><span class="tag">Tokio Marine</span><span class="tag">Porto Seguro</span><span class="tag">Universal Assistance</span><span class="tag">Coris</span></div>
+      </div>
+      <div class="card" style="background:#f7f9fc">
+        <span class="tierlbl tl-ref">○ Referencia / cruce (no-competencia)</span>
+        <div class="pill-row"><span class="tag">ComparaOnline BR</span><span class="tag">SegurosPromo</span><span class="tag">SeguroViagem.srv.br</span><span class="tag">Assistente de Viagem</span><span class="tag">Dicas de Viagem (blog)</span><span class="tag">gov.br (consular)</span></div>
+      </div>
+    </div>
+
+    <div class="read">
+      <b>Lectura del panorama orgánico.</b>
+      <ul>
+        <li><b>La competencia real de valor es transversal a la región:</b> las marcas de asistencia premium (<b>Assist Card, Universal Assistance, IATI, Allianz, AXA, Europ Assistance</b>) son el benchmark en ES y PT — más que cualquier competidor de Trawick en EE.UU.</li>
+        <li><b>El cruce/referencia es el que "ensucia" la oportunidad:</b> comparadores (ComparaOnline, Rastreator), bundles de banca-retail (Falabella, BCI, bancos) y blogs copan la primera página con intención genérica y de precio. Bajan la presencia posible sin ser rivales de calidad.</li>
+        <li><b>Ese cruce no existe igual en EE.UU.:</b> allá la banca no agrupa el seguro de viaje. Es un rasgo propio del mercado hispano-luso que hay que leer al planear presencia.</li>
+        <li><b>Coincidencia clave con el posicionamiento premium:</b> ningún actor de calidad domina hoy el ángulo "visitantes / seguro de viaje a EE.UU." en español — el pilar más hispanizable de Trawick queda poco disputado por marcas premium.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 04 COMPETENCIA PAID -->
+<section>
+  <div class="wrap">
+    <h2><span class="n">04</span>Competencia Paid (Google Ads)</h2>
+    <p class="lead">Quién invierte en búsqueda pagada, con la misma lógica de dos niveles: <b>competencia real</b> (marcas premium/calidad) vs. <b>referencia / cruce</b> (comparadores y marketplaces de precio, que encarecen y ensucian la subasta).</p>
+
+    <div class="ref ref-en"><span class="fl">🇺🇸</span>Referencia EE.UU. (inglés) — el entorno de pago de Trawick</div>
+    <div class="scroll">
+    <table class="tbl">
+      <thead><tr><th>Dominio</th><th>Perfil</th><th class="num">KW Ads comunes</th><th class="num">KW Ads (total)</th><th class="num">Tráfico pago/mes</th><th class="num">Inversión estim.</th></tr></thead>
+      <tbody>
+        <tr class="tier" style="background:#0EA5A4"><td colspan="6">◆ Base analizada — Trawick apenas invierte en Paid</td></tr>
+        <tr class="hi"><td class="dom">trawickinternational.com <span class="tag">TRAWICK</span></td><td><span class="badge b-prem">Aseguradora (Safe Travels)</span><a href="#nota-pos" style="color:#d98324;font-weight:800;text-decoration:none"><sup>*</sup></a></td><td class="num">— · base</td><td class="num">12</td><td class="num">403</td><td class="num">US$1,9K</td></tr>
+        <tr class="tier"><td colspan="6">● Competencia real — premium / calidad (aseguradoras y underwriters que sí invierten)</td></tr>
+        <tr><td class="dom">imglobal.com <span class="tag">IMG</span></td><td><span class="badge b-prem">Underwriter premium / expat</span></td><td class="num">8</td><td class="num">1.182</td><td class="num">126.266</td><td class="num">US$1,02M</td></tr>
+        <tr><td class="dom">sevencorners.com</td><td><span class="badge b-prem">Aseguradora premium</span></td><td class="num">5</td><td class="num">967</td><td class="num">64.845</td><td class="num">US$384K</td></tr>
+        <tr><td class="dom">worldtrips.com</td><td><span class="badge b-prem">Underwriter premium</span></td><td class="num">1</td><td class="num">592</td><td class="num">25.774</td><td class="num">US$179K</td></tr>
+        <tr><td class="dom">travelguard.com · travelinsured.com</td><td><span class="badge b-prem">Aseguradora premium</span></td><td class="num">2 / 3</td><td class="num">157 / 168</td><td class="num">6.008 / 5.114</td><td class="num">US$27K / 32K</td></tr>
+        <tr><td class="dom">bcbsglobalsolutions.com</td><td><span class="badge b-prem">Médico global / expat</span></td><td class="num">1</td><td class="num">187</td><td class="num">5.022</td><td class="num">US$14K</td></tr>
+        <tr class="tier tier-ref"><td colspan="6">○ Referencia / cruce — comparadores, marketplaces de precio y contenido</td></tr>
+        <tr class="refrow"><td class="dom">squaremouth.com</td><td><span class="badge b-ref">Comparador</span></td><td class="num">5</td><td class="num">68</td><td class="num">2.945</td><td class="num">US$18K</td></tr>
+        <tr class="refrow"><td class="dom">insubuy.com · visitorscoverage.com</td><td><span class="badge b-ref">Marketplace visitantes (precio)</span></td><td class="num">1 / 1</td><td class="num">274 / 168</td><td class="num">13.789 / 3.903</td><td class="num">US$17K / 6K</td></tr>
+        <tr class="refrow"><td class="dom">forbes.com</td><td><span class="badge b-ref">Contenido / reseñas (pago)</span></td><td class="num">1</td><td class="num">3.868</td><td class="num">156.249</td><td class="num">US$1,3M</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="src" style="margin-top:6px">Datos de pago de Semrush (base US). "Inversión estim." = costo mensual estimado del tráfico pagado, no gasto declarado. Trawick pauta ~12 keywords: prácticamente ausente del canal.</p>
+
+    <div class="two" style="margin-top:20px">
+      <div>
+        <div class="ref ref-es" style="margin-top:0"><span class="fl">🌎</span>Español — pujan por "seguro de viaje"</div>
+        <div class="card">
+          <span class="tierlbl tl-prem">● Competencia real (premium)</span>
+          <p style="margin:0 0 3px;font-weight:700;color:var(--navy2);font-size:11.5px">🇪🇸 España</p>
+          <div class="pill-row"><span class="tag">Allianz Assistance</span><span class="tag">Europ Assistance</span><span class="tag">Heymondo</span><span class="tag">Chapka Direct</span></div>
+          <p style="margin:8px 0 3px;font-weight:700;color:var(--navy2);font-size:11.5px">🇲🇽 México</p>
+          <div class="pill-row"><span class="tag">IATI Global</span><span class="tag">ProtegeTuViaje</span></div>
+          <p style="margin:10px 0 4px"><span class="tierlbl tl-ref" style="margin:0">○ Cruce</span></p>
+          <div class="pill-row"><span class="tag">Rastreator (comparador)</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="ref ref-pt" style="margin-top:0"><span class="fl">🇧🇷</span>Portugués — pujan por "seguro viagem"</div>
+        <div class="card">
+          <span class="tierlbl tl-prem">● Competencia real (premium)</span>
+          <div class="pill-row"><span class="tag">Porto Seguro</span><span class="tag">Allianz Travel BR</span></div>
+          <p style="margin:10px 0 4px"><span class="tierlbl tl-ref" style="margin:0">○ Cruce</span></p>
+          <div class="pill-row"><span class="tag">SegurosPromo (comparador)</span></div>
+          <p style="font-size:12px;color:var(--muted);margin:10px 0 0">Semrush captura pocos pujadores activos en el término de cabeza; el pago en Brasil se mueve mucho vía comparadores y campañas de marca no siempre visibles en este corte.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="read">
+      <b>Lectura del panorama pago.</b>
+      <ul>
+        <li><b>Trawick casi no juega en Paid</b> (12 kw · ~403 clics/mes). Quienes sí invierten fuerte en EE.UU. son underwriters premium (imglobal/IMG US$1,02M, sevencorners US$384K, worldtrips US$179K) — el mismo perfil de calidad al que aspira el posicionamiento hispano.</li>
+        <li>En español el pago lo lideran <b>marcas de asistencia premium</b> (Allianz, Europ Assistance, Heymondo, Chapka); el único <b>cruce</b> relevante es Rastreator (comparador). No hay especialista "visitantes a EE.UU." premium pujando fuerte — nicho abierto.</li>
+        <li>El término de cabeza es <b>caro y disputado</b>; los comparadores/marketplaces del nivel referencia <b>inflan la subasta</b> sin ser competencia de calidad — a nivel pago se tratan con negativos y foco en long-tail de segmento/destino.</li>
+        <li>El CPC más alto de la región está en <b>México</b> (US$3–5), señal de mayor valor comercial por clic.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 05 KEYWORD RESEARCH -->
+<section>
+  <div class="wrap">
+    <h2><span class="n">05</span>Keyword Research — el universo de búsqueda</h2>
+    <p class="lead">Los conceptos y términos que mueven volumen, por idioma. Distinguimos tres tipos: <b>Búsquedas de Categoría</b> (seguros — esta sección), <b>Búsquedas de Competencia</b> (marca de los rivales reales — abajo) y <b>Búsquedas Adyacentes</b> (turismo médico / Clínica Mayo — capítulo 06). Primero el universo de Trawick en inglés; luego la demanda real en español (5 países) y en portugués (Brasil + Portugal).</p>
+    <div class="ref ref-en" style="background:#eef4fb;color:var(--navy2)"><span class="fl">🏷️</span>Búsquedas de Categoría (seguros)</div>
+
+    <div class="ref ref-en"><span class="fl">🇺🇸</span>Referencia EE.UU. (inglés) — universo de la categoría / Trawick</div>
+    <div class="scroll">
+    <table class="tbl">
+      <thead><tr><th>Keyword</th><th>Clúster / concepto</th><th class="num">Vol. mes</th><th class="num">CPC US$</th><th>Intención</th></tr></thead>
+      <tbody>
+        <tr><td class="kw">travel insurance international</td><td>Cabeza de categoría</td><td class="num">22.200</td><td class="num">7,08</td><td>Comercial / Alta</td></tr>
+        <tr><td class="kw">travel medical insurance international</td><td>Médico de viaje (outbound)</td><td class="num">2.900</td><td class="num">7,36</td><td>Informacional / Alta</td></tr>
+        <tr><td class="kw">health insurance for international travel</td><td>Médico de viaje (outbound)</td><td class="num">1.900</td><td class="num">7,70</td><td>Informacional / Alta</td></tr>
+        <tr class="hi"><td class="kw">medical insurance for visitors to usa</td><td><b>Visitantes a EE.UU. (inbound)</b></td><td class="num">1.600</td><td class="num">8,70</td><td>Informacional / Alta</td></tr>
+        <tr class="hi"><td class="kw">travel insurance america · usa tourist insurance</td><td><b>Visitantes a EE.UU. (inbound)</b></td><td class="num">880 · 320</td><td class="num">5,32</td><td>Informacional / Alta</td></tr>
+        <tr><td class="kw">cfar travel insurance</td><td>Cancelación (cancel for any reason)</td><td class="num">1.900</td><td class="num">4,16</td><td>Informacional / Media</td></tr>
+        <tr><td class="kw">annual · yearly travel insurance</td><td>Anual / viajero frecuente</td><td class="num">2.400–2.900</td><td class="num">4,99</td><td>Comercial / Alta</td></tr>
+        <tr><td class="kw">travel insurance costa rica · israel</td><td>Destino (páginas por país)</td><td class="num">880 · 480</td><td class="num">10,80</td><td>Informacional / Media</td></tr>
+        <tr><td class="kw">schengen visa travel insurance</td><td>Visa / Europa</td><td class="num">880</td><td class="num">5,33</td><td>Informacional / Alta</td></tr>
+        <tr><td class="kw">best travel insurance for international travel</td><td>Comparación / reseña</td><td class="num">1.600</td><td class="num">8,38</td><td>Comercial / Alta</td></tr>
+        <tr><td class="kw">safe travels usa · comprehensive · elite</td><td>Marca de producto (Trawick)</td><td class="num">480–720</td><td class="num">7,96</td><td>Navegacional / Marca</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3 style="margin-bottom:6px">Marca (branded search) — el universo del término "Trawick"</h3>
+    <p class="lead" style="margin-top:0">Búsqueda de marca en EE.&nbsp;UU. (base us): intención <b>navegacional</b>, CPC US$4,32, dificultad 46%. Es demanda de reconocimiento —importante en su mercado, pero que <b>no se transfiere</b> a un mercado hispano donde la marca aún no existe.</p>
+    <div class="grid g3">
+      <div class="card">
+        <p style="margin:0 0 8px;font-weight:800;color:var(--navy2);font-size:12px">VARIACIONES DE MARCA (US)</p>
+        <table class="tbl" style="font-size:12px">
+          <thead><tr><th>Keyword</th><th class="num">Vol.</th><th class="num">KD%</th></tr></thead>
+          <tbody>
+            <tr><td class="kw">trawick travel insurance</td><td class="num">5.400</td><td class="num">31</td></tr>
+            <tr><td class="kw">trawick international</td><td class="num">4.400</td><td class="num">56</td></tr>
+            <tr><td class="kw">trawick</td><td class="num">2.900</td><td class="num">46</td></tr>
+            <tr><td class="kw">trawick international travel insurance</td><td class="num">1.900</td><td class="num">34</td></tr>
+            <tr><td class="kw">trawick travel insurance reviews</td><td class="num">1.600</td><td class="num">34</td></tr>
+          </tbody>
+        </table>
+        <p class="src" style="margin:8px 0 0">2.400 variaciones · volumen total ≈37.800/mes.</p>
+      </div>
+      <div class="card">
+        <p style="margin:0 0 8px;font-weight:800;color:var(--navy2);font-size:12px">HUELLA GLOBAL DE LA MARCA ("trawick")</p>
+        <table class="tbl" style="font-size:12px">
+          <thead><tr><th>País</th><th class="num">Volumen</th></tr></thead>
+          <tbody>
+            <tr><td class="kw"><span class="flag">🇺🇸</span>Estados Unidos</td><td class="vc b5">2.900</td></tr>
+            <tr><td class="kw"><span class="flag">🇬🇧</span>Reino Unido</td><td class="vc b1">170</td></tr>
+            <tr class="hi"><td class="kw"><span class="flag">🇧🇷</span>Brasil</td><td class="vc b1">110</td></tr>
+            <tr><td class="kw"><span class="flag">🇮🇳</span>India</td><td class="vc b1">110</td></tr>
+            <tr><td class="kw"><span class="flag">🇨🇦</span>Canadá</td><td class="vc b0">90</td></tr>
+            <tr><td class="kw"><span class="flag">🇫🇷</span>Francia</td><td class="vc b0">70</td></tr>
+          </tbody>
+        </table>
+        <p class="src" style="margin:8px 0 0">Volumen global ≈3.800. En LatAm hispano ≈0: la marca es un activo <b>solo en su mercado actual</b>.</p>
+      </div>
+      <div class="card">
+        <p style="margin:0 0 8px;font-weight:800;color:var(--navy2);font-size:12px">PREGUNTAS DE MARCA (CONFIANZA)</p>
+        <table class="tbl" style="font-size:12px">
+          <thead><tr><th>Pregunta</th><th class="num">Vol.</th></tr></thead>
+          <tbody>
+            <tr class="hi"><td class="kw">is trawick travel insurance good</td><td class="num">210</td></tr>
+            <tr class="hi"><td class="kw">is trawick international legit</td><td class="num">30</td></tr>
+            <tr><td class="kw" style="color:#9aa8b5">don trawick <span class="tag" style="background:#f1f1f1">homónimo</span></td><td class="num">20</td></tr>
+            <tr><td class="kw" style="color:#9aa8b5">how did chelsea trawick die <span class="tag" style="background:#f1f1f1">homónimo</span></td><td class="num">20</td></tr>
+            <tr><td class="kw" style="color:#9aa8b5">is jason trawick married <span class="tag" style="background:#f1f1f1">homónimo</span></td><td class="num">20</td></tr>
+          </tbody>
+        </table>
+        <p class="src" style="margin:8px 0 0">Señal útil: la gente valida <b>si es confiable/legítima</b> antes de comprar. Ojo: parte del volumen de marca es <b>ruido de homónimos</b> (personas apellidadas Trawick), no el asegurador.</p>
+      </div>
+    </div>
+    <div class="read" style="margin-top:14px">
+      <b>Lectura de la marca.</b> La búsqueda de marca de Trawick es real pero <b>anglocéntrica y no exportable</b>: en el mundo hispano nadie la busca todavía (greenfield). Dos señales aprovechables: (1) hay <b>demanda de reputación</b> ("is it good/legit") → al entrar a un mercado nuevo hará falta contenido de confianza (reseñas, respaldo, coberturas claras); (2) la marca atrae búsquedas <b>price-sensitive</b> ("cheap insurance for travel", "holiday insurance quotes" en su clúster de marca) — dato a tener en cuenta si el posicionamiento hispano se define como premium/calidad.
+    </div>
+
+    <div class="ref ref-es" style="background:#e6f7f4"><span class="fl">🏷️</span>Búsquedas de Competencia (real) — demanda de marca de los rivales premium</div>
+    <p class="lead" style="margin-top:0">Cuánto se busca <b>cada competidor real por su nombre</b> (búsquedas/mes). Es la magnitud del activo de marca que ya tienen en la región — y el contraste con Trawick (≈0 en ES/PT).</p>
+    <div class="scroll">
+    <table class="tbl">
+      <thead><tr>
+        <th>Marca (competencia real)</th>
+        <th class="num"><span class="flag">🇨🇱</span>CL</th><th class="num"><span class="flag">🇲🇽</span>MX</th><th class="num"><span class="flag">🇪🇸</span>ES</th><th class="num"><span class="flag">🇧🇷</span>BR</th><th>Perfil / eje</th>
+      </tr></thead>
+      <tbody>
+        <tr class="hi"><td class="dom">Assist Card</td><td class="vc b4">8.100</td><td class="vc b4">6.600</td><td class="vc b2">1.900</td><td class="vc b5">14.800</td><td>Asistencia · líder LatAm</td></tr>
+        <tr class="hi"><td class="dom">Heymondo</td><td class="vc b1">390</td><td class="vc b2">590</td><td class="vc b5">27.100</td><td class="vc b0">—</td><td>Insurtech · líder España</td></tr>
+        <tr class="hi"><td class="dom">IATI</td><td class="vc b1">170</td><td class="vc b3">1.300</td><td class="vc b5">14.800</td><td class="vc b4">4.400</td><td>Cobertura · ES + BR</td></tr>
+        <tr><td class="dom">Intermundial</td><td class="vc b0">30</td><td class="vc b2">590</td><td class="vc b4">9.900</td><td class="vc b0">—</td><td>Aseguradora · España</td></tr>
+        <tr><td class="dom">Universal Assistance</td><td class="vc b2">1.900</td><td class="vc b2">1.900</td><td class="vc b1">480</td><td class="vc b4">4.400</td><td>Asistencia · LatAm</td></tr>
+        <tr><td class="dom">Allianz Travel</td><td class="vc b0">30</td><td class="vc b1">390</td><td class="vc b1">390</td><td class="vc b4">4.400</td><td>Aseguradora global</td></tr>
+        <tr><td class="dom">Porto Seguro · Affinity (viagem)</td><td class="vc b0">—</td><td class="vc b0">—</td><td class="vc b0">—</td><td class="vc b4">4.400 · 2.900</td><td>Aseguradoras · Brasil</td></tr>
+        <tr><td class="dom">Travel Guard (AIG) · IMG</td><td class="vc b0">20 · 30</td><td class="vc b0">70 · 20</td><td class="vc b0">—</td><td class="vc b0">—</td><td>Premium EE.UU. (poca marca en región)</td></tr>
+        <tr style="border-top:2px solid var(--teal)"><td class="dom" style="color:#0b8483">Trawick <span class="tag">base</span></td><td class="vc b0">0</td><td class="vc b0">≈0</td><td class="vc b0">0</td><td class="vc b0">≈0</td><td>Sin activo de marca en ES/PT</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="src" style="margin-top:6px">Comparadores como <b>Seguros Promo</b> (BR 12.100) quedan fuera de esta tabla por ser referencia/cruce, no competencia de calidad. La brecha es evidente: Assist Card, Heymondo o IATI ya mueven <b>miles a decenas de miles</b> de búsquedas de marca donde Trawick tiene ≈0.</p>
+
+    <div class="ref ref-es"><span class="fl">🏷️</span>Búsquedas de Categoría — Referencia español: demanda por país (búsquedas/mes)</div>
+    <p class="lead" style="margin-top:0">Color = magnitud relativa, de <span class="b0">gris (bajo)</span> a <span class="b5" style="padding:1px 5px;border-radius:4px">verde (muy alto)</span>.</p>
+    <div class="scroll">
+    <table class="tbl">
+      <thead><tr>
+        <th>Concepto (keyword)</th>
+        <th class="num"><span class="flag">🇨🇱</span>CL</th><th class="num"><span class="flag">🇲🇽</span>MX</th><th class="num"><span class="flag">🇪🇸</span>ES</th><th class="num"><span class="flag">🇨🇴</span>CO</th><th class="num"><span class="flag">🇦🇷</span>AR</th>
+      </tr></thead>
+      <tbody>
+        <tr><td class="kw">seguro de viaje</td><td class="vc b5">14.800</td><td class="vc b3">3.600</td><td class="vc b5">14.800</td><td class="vc b4">5.400</td><td class="vc b4">4.400</td></tr>
+        <tr><td class="kw">seguro de viaje internacional</td><td class="vc b4">5.400</td><td class="vc b3">3.600</td><td class="vc b4">6.600</td><td class="vc b3">2.900</td><td class="vc b2">1.900</td></tr>
+        <tr><td class="kw">seguro médico de viaje</td><td class="vc b2">720</td><td class="vc b1">320</td><td class="vc b2">480</td><td class="vc b1">390</td><td class="vc b1">210</td></tr>
+        <tr class="hi"><td class="kw">seguro médico internacional</td><td class="vc b1">260</td><td class="vc b2">480</td><td class="vc b1">390</td><td class="vc b3">1.600</td><td class="vc b1">210</td></tr>
+        <tr class="hi"><td class="kw">seguro medico para viajeros</td><td class="vc b3">1.000</td><td class="vc b1">170</td><td class="vc b0">40</td><td class="vc b3">1.300</td><td class="vc b2">720</td></tr>
+        <tr class="hi"><td class="kw">seguro de viaje a estados unidos</td><td class="vc b1">170</td><td class="vc b2">590</td><td class="vc b1">320</td><td class="vc b1">170</td><td class="vc b0">20</td></tr>
+        <tr><td class="kw">seguro schengen</td><td class="vc b1">170</td><td class="vc b0">140</td><td class="vc b1">260</td><td class="vc b2">480</td><td class="vc b0">20</td></tr>
+        <tr><td class="kw">seguro de viaje europa</td><td class="vc b2">480</td><td class="vc b2">590</td><td class="vc b3">1.300</td><td class="vc b1">390</td><td class="vc b1">320</td></tr>
+        <tr><td class="kw">seguro de viaje anual</td><td class="vc b1">110</td><td class="vc b0">10</td><td class="vc b2">720</td><td class="vc b0">20</td><td class="vc b0">10</td></tr>
+        <tr><td class="kw">seguro de viaje para estudiantes</td><td class="vc b0">30</td><td class="vc b0">30</td><td class="vc b1">260</td><td class="vc b0">30</td><td class="vc b0">30</td></tr>
+        <tr><td class="kw">seguro de viaje covid</td><td class="vc b3">2.400</td><td class="vc b0">—</td><td class="vc b0">50</td><td class="vc b0">—</td><td class="vc b1">320</td></tr>
+        <tr class="hi"><td class="kw">asistencia al viajero</td><td class="vc b1">210</td><td class="vc b0">140</td><td class="vc b2">390</td><td class="vc b1">260</td><td class="vc b5">22.200</td></tr>
+        <tr class="hi"><td class="kw">asistencia en viaje</td><td class="vc b2">480</td><td class="vc b0">30</td><td class="vc b2">390</td><td class="vc b1">170</td><td class="vc b0">140</td></tr>
+        <tr><td class="kw">mejor seguro de viaje</td><td class="vc b2">720</td><td class="vc b1">210</td><td class="vc b3">1.000</td><td class="vc b0">20</td><td class="vc b0">140</td></tr>
+        <tr><td class="kw">seguro de viaje barato</td><td class="vc b1">210</td><td class="vc b1">320</td><td class="vc b2">880</td><td class="vc b1">320</td><td class="vc b1">260</td></tr>
+        <tr><td class="kw">seguro para viajar</td><td class="vc b1">320</td><td class="vc b1">390</td><td class="vc b0">110</td><td class="vc b2">880</td><td class="vc b1">210</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="ref ref-pt"><span class="fl">🇧🇷🇵🇹</span>Referencia portugués — Brasil y Portugal (búsquedas/mes)</div>
+    <div class="scroll">
+    <table class="tbl">
+      <thead><tr><th>Concepto (keyword)</th><th class="num"><span class="flag">🇧🇷</span>Brasil</th><th class="num"><span class="flag">🇵🇹</span>Portugal</th><th>Nota terminológica</th></tr></thead>
+      <tbody>
+        <tr><td class="kw">seguro viagem</td><td class="vc b5">40.500</td><td class="vc b4">4.400</td><td>Sin "de". Es EL término (mayor volumen de toda la región).</td></tr>
+        <tr><td class="kw">seguro viagem internacional</td><td class="vc b5">18.100</td><td class="vc b2">880</td><td>Segundo concepto de cabeza.</td></tr>
+        <tr><td class="kw">seguro de viagem / …internacional (PT)</td><td class="vc b0">—</td><td class="vc b3">2.400 / 720</td><td>En Portugal convive la forma con "de".</td></tr>
+        <tr><td class="kw">seguro viagem europa</td><td class="vc b4">5.400</td><td class="vc b2">480</td><td>Europa, el destino nº1.</td></tr>
+        <tr class="hi"><td class="kw">seguro viagem eua · estados unidos</td><td class="vc b3">1.000 · 720</td><td class="vc b0">20</td><td><b>Equivale al inbound de Trawick.</b></td></tr>
+        <tr class="hi"><td class="kw">seguro viagem chile · para argentina</td><td class="vc b3">1.300 · 1.300</td><td class="vc b0">—</td><td>Destino-modifier: brasileño asegura viaje a vecinos.</td></tr>
+        <tr><td class="kw">seguro viagem para portugal</td><td class="vc b2">590</td><td class="vc b0">—</td><td>Flujo BR→PT relevante.</td></tr>
+        <tr><td class="kw">melhor seguro viagem</td><td class="vc b3">1.300</td><td class="vc b0">110</td><td>Comparación / reseña.</td></tr>
+        <tr><td class="kw">seguro viagem barato</td><td class="vc b2">880</td><td class="vc b0">140</td><td>Precio.</td></tr>
+        <tr class="hi"><td class="kw">seguro saúde viagem</td><td class="vc b2">720</td><td class="vc b1">210</td><td>Encuadre "salud" (equivale a médico de viaje).</td></tr>
+        <tr class="hi"><td class="kw">assistência de viagem (BR) · em viagem (PT)</td><td class="vc b0">10</td><td class="vc b3">1.000</td><td>"Asistencia" pesa en <b>Portugal</b>, no en Brasil.</td></tr>
+        <tr><td class="kw">cotação de seguro viagem</td><td class="vc b1">260</td><td class="vc b0">—</td><td><b>Término transaccional propio de Brasil</b> ("cotizar").</td></tr>
+        <tr><td class="kw">seguro viagem anual</td><td class="vc b1">320</td><td class="vc b0">20</td><td>Viajero frecuente.</td></tr>
+        <tr><td class="kw">seguro viagem estudante</td><td class="vc b1">170</td><td class="vc b0">30</td><td>Intercambio / estudios.</td></tr>
+        <tr><td class="kw">seguro viagem schengen</td><td class="vc b1">260</td><td class="vc b0">20</td><td>Visa Europa.</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>Mapa de equivalencia semántica — un concepto, tres idiomas</h3>
+    <div class="scroll">
+    <table class="tbl">
+      <thead><tr><th>Concepto</th><th>🇺🇸 Inglés (EE.UU.)</th><th>🌎 Español</th><th>🇧🇷 Portugués</th><th>Dónde pesa más</th></tr></thead>
+      <tbody>
+        <tr><td class="th">Categoría (cabeza)</td><td>travel insurance / international travel insurance</td><td>seguro de viaje / …internacional</td><td>seguro viagem / …internacional</td><td>BR (40.500) · CL·ES (14.800)</td></tr>
+        <tr class="hi"><td class="th">Médico / salud de viaje</td><td>travel medical · health insurance for travel</td><td>seguro médico de viaje · para viajeros</td><td>seguro saúde viagem · médico viagem</td><td>CO · CL · BR</td></tr>
+        <tr class="hi"><td class="th">Visitantes a EE.UU. (inbound)</td><td>visitors to usa · usa tourist insurance</td><td>seguro de viaje a Estados Unidos</td><td>seguro viagem EUA · estados unidos</td><td>MX · BR</td></tr>
+        <tr><td class="th">Visa Europa</td><td>schengen visa travel insurance</td><td>seguro Schengen</td><td>seguro viagem schengen</td><td>CO · ES · BR</td></tr>
+        <tr><td class="th">Anual / frecuente</td><td>annual · yearly travel insurance</td><td>seguro de viaje anual</td><td>seguro viagem anual</td><td>ES · BR</td></tr>
+        <tr><td class="th">Cancelación</td><td>cancel for any reason (CFAR) · trip cancellation</td><td>seguro de cancelación de viaje</td><td>cancelamento de viagem</td><td>EE.UU. (categoría por educar en ES/PT)</td></tr>
+        <tr><td class="th">Estudiantes</td><td>student travel insurance</td><td>seguro de viaje para estudiantes</td><td>seguro viagem estudante</td><td>ES (Erasmus)</td></tr>
+        <tr class="hi"><td class="th">Asistencia</td><td>travel assistance</td><td>asistencia al viajero · en viaje</td><td>assistência de/em viagem</td><td>AR (22.200) · PT (1.000)</td></tr>
+        <tr class="hi"><td class="th">Destino (long-tail)</td><td>travel insurance [country]</td><td>seguro para viajar a [destino]</td><td>seguro viagem para [destino]</td><td>Todos (motor long-tail)</td></tr>
+        <tr><td class="th">Comparación / precio</td><td>best · cheap travel insurance</td><td>mejor · barato · comparador</td><td>melhor · barato seguro viagem</td><td>ES · BR</td></tr>
+        <tr><td class="th">Cotizar (transaccional)</td><td>get a quote</td><td>cotizar seguro de viaje</td><td>cotação de seguro viagem</td><td>BR (término propio)</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="read">
+      <b>Lectura del Keyword Research.</b>
+      <ul>
+        <li><b>Los dos pilares de Trawick tienen demanda equivalente en ES/PT</b>, pero con nombre local: médico de viaje → "seguro médico/saúde"; visitantes a EE.UU. → "seguro de viaje a Estados Unidos / seguro viagem EUA".</li>
+        <li><b>Brasil concentra el mayor volumen absoluto</b> de la región y una terminología propia ("seguro viagem", "cotação"). No es un mercado hispano, pero es el más grande del análisis.</li>
+        <li><b>La palabra "asistencia" cambia de peso por país:</b> dominante en Argentina, relevante en Portugal, secundaria en Brasil. En español conviene cubrir "seguro" y "asistencia" a la vez.</li>
+        <li><b>El destino es el patrón long-tail más consistente</b> en los tres idiomas — la misma táctica que a Trawick ya le funciona en inglés (Costa Rica, Israel).</li>
+        <li><b>Cancelación/CFAR</b> tiene volumen en EE.UU. pero es casi inexistente en ES/PT: es una <b>categoría aún por educar</b> en el mercado hispano-luso.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 06 BUSQUEDAS ADYACENTES -->
+<section>
+  <div class="wrap">
+    <h2><span class="n">06</span>Búsquedas Adyacentes — turismo médico y Clínica Mayo</h2>
+    <p class="lead">Fuera de la categoría "seguros", hay un universo <b>adyacente</b> muy grande: la gente que investiga <b>atención médica en EE.&nbsp;UU.</b> Quien busca tratarse o consultar en una clínica estadounidense es <b>comprador natural de seguro médico de viaje</b>. La <b>Clínica Mayo (Mayo Clinic)</b> es el mejor proxy de esa intención por ser la marca-autoridad de salud más buscada.</p>
+
+    <div class="scroll">
+    <table class="tbl">
+      <thead><tr>
+        <th>Búsqueda adyacente</th>
+        <th class="num"><span class="flag">🇲🇽</span>MX</th><th class="num"><span class="flag">🇪🇸</span>ES</th><th class="num"><span class="flag">🇧🇷</span>BR</th><th class="num"><span class="flag">🇨🇴</span>CO</th><th class="num"><span class="flag">🇨🇱</span>CL</th>
+      </tr></thead>
+      <tbody>
+        <tr class="hi"><td class="kw">mayo clinic</td><td class="vc b5">40.500</td><td class="vc b5">12.100</td><td class="vc b3">2.900</td><td class="vc b3">1.300</td><td class="vc b3">1.000</td></tr>
+        <tr class="hi"><td class="kw">clínica mayo</td><td class="vc b3">1.000</td><td class="vc b3">1.300</td><td class="vc b2">480</td><td class="vc b1">210</td><td class="vc b2">480</td></tr>
+        <tr><td class="kw">turismo médico</td><td class="vc b2">480</td><td class="vc b1">70</td><td class="vc b1">70</td><td class="vc b1">170</td><td class="vc b1">70</td></tr>
+        <tr><td class="kw">hospitales en estados unidos</td><td class="vc b1">210</td><td class="vc b0">—</td><td class="vc b0">—</td><td class="vc b0">20</td><td class="vc b0">20</td></tr>
+        <tr><td class="kw">segunda opinión médica</td><td class="vc b0">20</td><td class="vc b1">320</td><td class="vc b0">20</td><td class="vc b0">20</td><td class="vc b0">20</td></tr>
+        <tr><td class="kw">tratamiento/tratamento · cirugía en EE.UU.</td><td class="vc b0">bajo</td><td class="vc b0">bajo</td><td class="vc b0">bajo</td><td class="vc b0">bajo</td><td class="vc b0">bajo</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="note" style="margin-top:14px">
+      <b>Cómo leer esto con honestidad.</b> El grueso del volumen de "Mayo Clinic" es <b>informacional</b>: mayoclinic.org es uno de los mayores sitios de contenido de salud del mundo y mucha gente llega buscando síntomas o enfermedades, <b>no</b> necesariamente para viajar a tratarse. La intención de <b>turismo médico real</b> (tratamiento/cirugía en EE.UU.) tiene volumen <b>bajo</b>. Aun así, el tamaño de la marca —y su pico en <b>México (40.500)</b> por cercanía— confirma una <b>demanda adyacente enorme alrededor de "salud + Estados Unidos"</b>, con un segmento genuino de viajero médico.</div>
+
+    <div class="read">
+      <b>Lectura de las búsquedas adyacentes.</b>
+      <ul>
+        <li><b>México es el epicentro:</b> "mayo clinic" 40.500/mes — proximidad geográfica + turismo médico hacia EE.UU. Es el mercado donde "salud + EE.UU." y "seguro de viaje a Estados Unidos" (visto en Categoría) se refuerzan.</li>
+        <li><b>España también es alto</b> (12.100) pero con sesgo informacional (contenido de salud); el turismo médico transfronterizo es menor.</li>
+        <li><b>Brasil, Colombia y Chile</b> muestran demanda moderada de la marca-autoridad, coherente con su clúster médico (recordar: Colombia lidera "seguro médico internacional/para viajeros" en Categoría).</li>
+        <li><b>Conexión con la categoría:</b> el adyacente médico enlaza con el pilar <b>inbound/médico</b> de Trawick (Safe Travels USA). No es demanda de seguro directa, pero es <b>territorio de contenido y audiencia</b> del mismo comprador.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 07 COMPOSICION -->
+<section>
+  <div class="wrap">
+    <h2><span class="n">07</span>Composición de la demanda por idioma y tipo de búsqueda</h2>
+    <p class="lead">Una barra por idioma —Español (LatAm + España), Portugués (Brasil + Portugal) e Inglés (EE.&nbsp;UU., de referencia)— compuesta por los cuatro tipos de búsqueda: <b>Marca</b> (Trawick), <b>Categoría</b> (seguros), <b>Competencia</b> (marca de rivales reales) y <b>Adyacente</b> (turismo médico / Clínica Mayo).</p>
+    <div class="chartbox">
+      <div class="cols"><div class="col"><div class="seg" style="height:115px;background:#0b8483">Categoría<small>111.530</small></div><div class="seg" style="height:83px;background:#d98324">Compet.<small>80.500</small></div><div class="seg" style="height:61px;background:#7a5bb5">Adyac.<a href="#nota-chart" style="color:#fff;text-decoration:none">*</a><small>59.310</small></div><div class="cap">🌎 Español<small>251.340</small></div></div><div class="col"><div class="seg" style="height:85px;background:#0b8483">Categoría<small>83.260</small></div><div class="seg" style="height:36px;background:#d98324">Compet.<small>35.300</small></div><div class="seg" style="height:4px;background:#7a5bb5"></div><div class="cap">🇧🇷 Portugués<small>122.010</small></div></div><div class="col"><div class="seg" style="height:40px;background:#0b8483">Cat.<small>38.440</small></div><div class="seg" style="height:181px;background:#d98324">Competencia<small>176.300</small></div><div class="seg" style="height:17px;background:#123a63"></div><div class="cap">🇺🇸 Inglés (ref.)<small>230.940</small></div></div></div>
+      <div class="leg">
+        <span><i style="background:#123a63"></i>Marca (Trawick)</span>
+        <span><i style="background:#0b8483"></i>Categoría (seguros)</span>
+        <span><i style="background:#d98324"></i>Competencia (marca rivales)</span>
+        <span><i style="background:#7a5bb5"></i>Adyacente (salud / Mayo)</span>
+      </div>
+    </div>
+
+    <div class="scroll" style="margin-top:16px">
+    <table class="tbl">
+      <thead><tr><th>Tipo de búsqueda</th><th class="num">🌎 Español</th><th class="num">🇧🇷 Portugués</th><th class="num">🇺🇸 Inglés (ref.)</th></tr></thead>
+      <tbody>
+        <tr><td class="kw" style="border-left:4px solid #123a63">Marca (Trawick)</td><td class="num">≈0</td><td class="num">≈0</td><td class="num">16.200</td></tr>
+        <tr><td class="kw" style="border-left:4px solid #0b8483">Categoría (seguros)</td><td class="num">111.530</td><td class="num">83.260</td><td class="num">38.440</td></tr>
+        <tr><td class="kw" style="border-left:4px solid #d98324">Competencia (marca rivales reales)</td><td class="num">80.500</td><td class="num">35.300</td><td class="num">176.300</td></tr>
+        <tr><td class="kw" style="border-left:4px solid #7a5bb5">Adyacente (salud / Mayo)<a href="#nota-chart" style="color:#7a5bb5;font-weight:800;text-decoration:none"><sup>*</sup></a></td><td class="num">59.310</td><td class="num">3.450</td><td class="num">n/a</td></tr>
+        <tr style="border-top:2px solid var(--line)"><td class="kw"><b>Total analizado</b></td><td class="num"><b>251.340</b></td><td class="num"><b>122.010</b></td><td class="num"><b>230.940</b></td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3 style="margin-bottom:6px">CPC promedio por tipo de búsqueda (USD)</h3>
+    <p class="lead" style="margin-top:0">Costo por clic promedio de cada tipo, <b>ponderado por volumen</b> (excluye términos sin CPC y valores atípicos). El CPC de Semrush viene en USD, por lo que es comparable entre idiomas.</p>
+    <div class="scroll">
+    <table class="tbl">
+      <thead><tr><th>Tipo de búsqueda</th><th class="num">🌎 Español</th><th class="num">🇧🇷 Portugués</th><th class="num">🇺🇸 Inglés (ref.)</th></tr></thead>
+      <tbody>
+        <tr><td class="kw" style="border-left:4px solid #123a63">Marca (Trawick)</td><td class="num">n/a</td><td class="num">n/a</td><td class="num">$4,90</td></tr>
+        <tr><td class="kw" style="border-left:4px solid #0b8483">Categoría (seguros)</td><td class="num">$2,86</td><td class="num">$2,24</td><td class="num">$6,98</td></tr>
+        <tr><td class="kw" style="border-left:4px solid #d98324">Competencia (marca rivales reales)</td><td class="num">$1,32</td><td class="num">$1,58</td><td class="num">$4,93</td></tr>
+        <tr><td class="kw" style="border-left:4px solid #7a5bb5">Adyacente (salud / Mayo)<a href="#nota-chart" style="color:#7a5bb5;font-weight:800;text-decoration:none"><sup>*</sup></a></td><td class="num">$0,78</td><td class="num">$0,86</td><td class="num">n/a</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="src" style="margin-top:6px">Lectura rápida: el clic en <b>inglés es 2–3× más caro</b> (mercado maduro y monetizado); en ES/PT la <b>Categoría</b> ($2,2–2,9) es lo más caro, mientras <b>Competencia</b> (pujar por marca rival, $1,3–1,6) y sobre todo <b>Adyacente</b> ($0,8) son clics baratos. Marca de Trawick sin CPC en ES/PT porque no hay demanda propia.</p>
+
+    <div class="note" id="nota-chart" style="margin-top:14px">
+      <b>Cómo leerlo (sin exagerar).</b> Son <b>sumas de las búsquedas mensuales de los términos analizados en este estudio</b>, no el total del mercado — sirven para comparar <b>composición</b>, no para dimensionar la demanda absoluta. Notas: la <b>Marca</b> de Trawick es ≈0 en ES/PT (greenfield) y en EE.UU. suma sus variaciones principales; la <b>Competencia</b> excluye comparadores/marketplaces (referencia) y en inglés la infla Allianz (135.000); el <b>Adyacente*</b> incluye "Mayo Clinic", que es <b>mayormente informacional</b> (contenido de salud), por lo que sobreestima la intención real de turismo médico; en inglés el adyacente queda fuera de alcance (el análisis adyacente se centró en los mercados hispano y luso).
+    </div>
+
+    <div class="read">
+      <b>Lectura del gráfico.</b>
+      <ul>
+        <li><b>Español y Portugués viven de la Categoría y la Competencia:</b> la demanda existe y ya está capturada por marcas rivales — sin activo de marca propio (Trawick ≈0).</li>
+        <li><b>Inglés (referencia) está dominado por la Competencia de marca</b> (Allianz, Travel Guard…): un mercado maduro donde la marca lo es todo — justo lo que falta construir en ES/PT.</li>
+        <li><b>El bloque Adyacente pesa en Español</b> (salud + EE.UU., con México al frente): una audiencia grande que hoy nadie del rubro seguros conecta con la categoría.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 08 DIFERENCIAL COMUNICACION -->
+<section>
+  <div class="wrap">
+    <h2><span class="n">08</span>Diferencial en la comunicación</h2>
+    <p class="lead">Qué comunica cada marca <b>para vender</b> — su mensaje central y su eje diferencial. Mensajes tomados de la <b>comunicación pública en vivo</b> de cada marca (sitio propio; ver fuentes).</p>
+
+    <div class="scroll">
+    <table class="tbl">
+      <thead><tr><th>Marca</th><th>Perfil</th><th>Qué comunica para la venta (mensaje central)</th><th>Eje diferencial</th></tr></thead>
+      <tbody>
+        <tr class="tier" style="background:#0EA5A4"><td colspan="4">◆ Base analizada</td></tr>
+        <tr class="hi"><td class="dom">Trawick <span class="tag">Safe Travels</span><a href="#nota-pos" style="color:#d98324;font-weight:800;text-decoration:none"><sup>*</sup></a></td><td><span class="badge b-prem">Base</span></td><td>"Planes de seguro de viaje <b>para cada viaje</b>": catálogo amplio (visitantes a EE.UU., cancelación, anual, CFAR) a precio <b>accesible</b>. Reseñas lo ubican como opción económica.</td><td>Amplitud de catálogo + accesibilidad <span class="tag">hoy compite por variedad/precio</span></td></tr>
+        <tr class="tier"><td colspan="4">● Competencia real — premium / calidad</td></tr>
+        <tr><td class="dom">Allianz <span class="tag">Travel</span></td><td><span class="badge b-prem">Aseguradora global</span></td><td>Respaldo de una <b>gran aseguradora mundial</b>, "viaja con confianza" y asistencia 24h. Solidez y tranquilidad.</td><td>Marca / solidez financiera</td></tr>
+        <tr><td class="dom">AIG Travel Guard</td><td><span class="badge b-prem">Aseguradora global</span></td><td>Respaldo corporativo (AIG), planes <b>personalizables</b> y asistencia de <b>emergencia / concierge</b>; "peace of mind".</td><td>Respaldo + servicio de emergencia</td></tr>
+        <tr class="hi"><td class="dom">IMG <span class="tag">Global</span></td><td><span class="badge b-prem">Médico / expat</span></td><td>"Seguro <b>médico</b> internacional de viaje", líder global en salud del viajero, <b>red mundial de proveedores</b>, expat y larga estancia.</td><td>Robustez médica + alcance global</td></tr>
+        <tr class="hi"><td class="dom">Assist Card</td><td><span class="badge b-prem">Asistencia (líder LatAm)</span></td><td>"La <b>tranquilidad</b> de viajar con <b>asistencia global</b>": red propia 24/7, app, presencia mundial. Vende <b>asistencia</b>, no "seguro".</td><td>Asistencia + red global + servicio</td></tr>
+        <tr class="hi"><td class="dom">Universal Assistance</td><td><span class="badge b-prem">Asistencia (LatAm)</span></td><td>"<b>Expertos</b> en asistencia al viajero": cobertura para <b>requisitos de visa</b>, financiación en cuotas y educación de categoría ("seguro vs. asistencia").</td><td>Expertise + facilidades de pago</td></tr>
+        <tr><td class="dom">IATI</td><td><span class="badge b-prem">Aseguradora (ES)</span></td><td>"Seguros de viaje con las <b>mejores coberturas</b>": sin franquicia, aventura/mochilero, coberturas altas, descuento.</td><td>Cobertura superior + nicho aventura</td></tr>
+        <tr><td class="dom">Heymondo</td><td><span class="badge b-prem">Insurtech (ES)</span></td><td><b>App</b> con chat médico 24/7, <b>sin adelantar dinero</b>, "asegura el viaje de tus sueños". Experiencia digital.</td><td>Experiencia digital / UX moderna</td></tr>
+        <tr class="tier tier-ref"><td colspan="4">○ Referencia / cruce — no-competencia (comunican precio o conveniencia)</td></tr>
+        <tr class="refrow"><td class="dom">ComparaOnline · Rastreator · Squaremouth</td><td><span class="badge b-ref">Comparadores</span></td><td>"<b>Compara y ahorra</b> / encuentra el más barato": precio, cotización rápida, muchas opciones en un lugar.</td><td>Precio / comparación</td></tr>
+        <tr class="refrow"><td class="dom">Falabella · BCI · bancos</td><td><span class="badge b-ref">Banca / retail</span></td><td>"Súmalo a tu <b>tarjeta / cuenta</b>, fácil": conveniencia, bundle, cuotas y confianza de la marca bancaria.</td><td>Conveniencia / bundle</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="src" style="margin-top:6px">Mensajes verificados en vivo (14-sep-2026) para Trawick, Assist Card, Universal Assistance, IATI, Heymondo e IMG. Para Allianz y AIG Travel Guard se describe su posicionamiento de marca conocido; su tagline exacto no se citó textualmente en esta pasada.</p>
+
+    <div class="read">
+      <b>Lectura del diferencial de comunicación.</b>
+      <ul>
+        <li>Los mensajes se agrupan en <b>seis ejes</b>: precio/accesibilidad · cobertura · asistencia/servicio · experiencia digital · respaldo de marca · médico/salud.</li>
+        <li><b>Cada marca premium "posee" un eje:</b> Assist Card/Universal = asistencia y servicio; IATI = cobertura; Heymondo = digital; IMG = médico/global; Allianz/AIG = respaldo. Están ocupados por marcas fuertes.</li>
+        <li><b>Trawick hoy comunica variedad + accesibilidad</b> — el eje de <b>precio</b>, que es justo el que satura el nivel referencia (comparadores y bundles). Es el mensaje más disputado y el menos diferenciable.</li>
+        <li><b>El eje con menos marca premium dedicada es el médico/inbound "seguro de viaje a EE.UU. / para visitantes"</b>: solo IMG lo toca de lleno en salud. Es el ángulo donde la comunicación premium está menos ocupada — y coincide con el pilar más hispanizable de Trawick.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 09 METODOLOGIA -->
+<section>
+  <div class="wrap">
+    <h2><span class="n">09</span>Metodología y notas de datos</h2>
+    <div class="card">
+      <ul class="clean" style="font-size:13.5px">
+        <li><b>Fuente:</b> Semrush (integración MCP), consultas en vivo el <b>14 de septiembre de 2026</b>. Reportes: <i>domain_rank, resource_organic, domain_organic_organic, domain_adwords_adwords, phrase_these, phrase_related, phrase_questions, phrase_organic, phrase_adwords</i>.</li>
+        <li><b>Bases regionales:</b> us · cl · mx · es · co · ar (español) · br · pt (portugués).</li>
+        <li><b>Volúmenes</b> = búsquedas mensuales <i>estimadas</i> por Semrush; son aproximaciones y varían mes a mes. "—" = el término no devolvió dato en esa base (volumen despreciable o no registrado), no un cero exacto.</li>
+        <li><b>Competencia orgánica EE.UU.</b> = índice de competencia de Semrush (comparten keywords con Trawick). <b>Competencia Paid</b> = datos de pago de Semrush (tráfico e inversión <i>estimados</i>, no gasto declarado); los pujadores por término de cabeza son un snapshot y pueden subrepresentar campañas activas.</li>
+        <li><b>Intención</b> mostrada de forma cualitativa a partir del tipo de término y las etiquetas de intent de Semrush.</li>
+        <li><b>Producto de Trawick</b> (línea Safe Travels) verificado en su sitio y fuentes públicas, no inferido.</li>
+        <li><b>Diferencial de comunicación:</b> mensajes tomados de la comunicación pública en vivo de cada marca (14-sep-2026); Trawick, Assist Card, Universal Assistance, IATI, Heymondo e IMG verificados en fuente; Allianz y AIG Travel Guard descritos por su posicionamiento conocido (sin cita textual del tagline).</li>
+        <li><b>Tres tipos de búsqueda:</b> <i>Categoría</i> (seguros), <i>Competencia</i> (nombre de marca de rivales premium) y <i>Adyacentes</i> (turismo médico / Clínica Mayo). Volúmenes vía <i>phrase_these</i> (bases cl·mx·es·co·ar·br·pt). Nota honesta: el volumen de "Mayo Clinic" es mayormente <b>informacional</b> (contenido de salud de mayoclinic.org), no intención directa de viajar a tratarse — se incluye como proxy de demanda adyacente, no como demanda de seguro.</li>
+        <li><b>Alcance:</b> análisis de <b>demanda de búsqueda, competencia y semántica</b> (SEO/SEM). <b>No incluye propuesta, plan de campaña ni auditoría de precios/cobertura/regulación</b> por país — pendiente para la siguiente etapa.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p style="margin:0 0 4px"><b>Análisis SEO &amp; Semántico — Trawick International y su competencia en EE.&nbsp;UU.</b> · Proyecto Seguro Salud</p>
+    <p class="src" style="margin:0">Datos en vivo de Semrush · 14-sep-2026 · Bases US · CL·MX·ES·CO·AR · BR·PT · Solo análisis (sin propuesta).</p>
+  </div>
+</footer>
+
+</body>
+</html>
